@@ -1,0 +1,35 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "Backend: palvelimen toiminnallisuus.",
+  "main": "nodemon index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alefyyyy/Fullstack-open-part3.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Alejandra Pérez Mondragón",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alefyyyy/Fullstack-open-part3/issues"
+  },
+  "homepage": "https://github.com/Alefyyyy/Fullstack-open-part3#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6"
+  }
+}
