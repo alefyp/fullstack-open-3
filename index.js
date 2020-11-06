@@ -1,8 +1,35 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 
-// app.use(express.urlencoded({ extended: false }));
+app.use(
+  // eslint-disable-next-line arrow-body-style
+  morgan((tokens, req, res) => {
+    const bodyContentString = JSON.stringify({
+      name: req.body.name,
+      number: req.body.number,
+    });
+
+    const rta = [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      tokens.res(req, res, 'content-length'),
+      '-',
+      tokens['response-time'](req, res),
+      'ms',
+    ];
+
+    if (req.body.name) {
+      rta.push(bodyContentString);
+      return rta.join(' ');
+    }
+
+    return rta.join(' ');
+  })
+);
+
 app.use(express.json());
 
 let persons = [
@@ -76,12 +103,16 @@ app.post('/api/persons', (req, res) => {
     });
   }
 
-  console.log(newPerson);
   newPerson.id = Math.trunc(Math.random() * (100000000 - 5) + 5);
-  console.log('new person with id', newPerson.id);
   persons.push(newPerson);
   res.json(newPerson);
 });
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' });
+};
+
+app.use(unknownEndpoint);
 
 const PORT = 3001;
 
